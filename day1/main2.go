@@ -23,7 +23,7 @@ var wordsNumbers = map[string]int{
 }
 
 func main() {
-	f, err := os.Open("test2.txt")
+	f, err := os.Open("input.txt")
 	if err != nil {
 		log.Fatal(err)
 	}
