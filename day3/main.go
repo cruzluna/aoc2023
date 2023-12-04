@@ -42,10 +42,13 @@ func main() {
 				continue
 			}
 
-			if str := dfs(grid, visited, i, j, ""); str != "" {
-				fmt.Println("DONE: ", str)
-				cnt, _ := strconv.Atoi(str)
-				total = total + cnt
+			if grid[i][j] >= 33 && grid[i][j] <= 47 && grid[i][j] != 46 {
+				// dfs from the symbol
+				if str := dfs(grid, visited, i, j, ""); str != "" {
+					fmt.Println("DONE: ", str)
+					cnt, _ := strconv.Atoi(str)
+					total = total + cnt
+				}
 			}
 			// once we find a sybol, add that to the total
 		}
@@ -64,20 +67,20 @@ func dfs(grid [][]rune, visited [][]bool, x, y int, buildString string) string {
 		return ""
 	}
 
-	// period
+	// period, now we finish
 	if grid[x][y] == 46 {
 		return ""
 	}
 
 	// found a symbol
-	if grid[x][y] >= 33 && grid[x][y] <= 47 && grid[x][y] != 46 {
-		// fmt.Println("MADE IT IN HERE: ", buildString)
-		return buildString
-	}
+	// if grid[x][y] >= 33 && grid[x][y] <= 47 && grid[x][y] != 46 {
+	// 	// fmt.Println("MADE IT IN HERE: ", buildString)
+	// 	return buildString
+	// }
 
 	visited[x][y] = true
 
-	// fmt.Printf("grid[x][y]: %v , bs: %s , uni %v", string(grid[x][y]), buildString, grid[x][y])
+	fmt.Printf("grid[x][y]: %v , bs: %s , uni %v\n", string(grid[x][y]), buildString, grid[x][y])
 	buildString = buildString + string(grid[x][y])
 	// fmt.Println("\nNew Str: ", buildString)
 
@@ -89,7 +92,7 @@ func dfs(grid [][]rune, visited [][]bool, x, y int, buildString string) string {
 		}
 	}
 
-	return ""
+	return buildString
 }
 
 func getDirections() [][]int {
